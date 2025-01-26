@@ -11,6 +11,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        royalblue: "#4e38f6", // UI Theme Color
       },
     },
   },
