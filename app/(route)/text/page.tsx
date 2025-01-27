@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Copy } from "lucide-react";
 
-const text = () => {
+export default function Text() {
 
     const [text, setText] = useState("");
 
@@ -67,4 +67,3 @@ const text = () => {
   )
 }
 
-export default text

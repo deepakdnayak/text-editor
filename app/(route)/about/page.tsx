@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const about = () => {
+export default function About() {
 
   const [message, setMessage] = useState("");
 
@@ -22,5 +22,3 @@ const about = () => {
     </div>
   )
 }
-
-export default about
