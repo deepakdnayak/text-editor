@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const about = () => {
+const About = () => {
 
   const [message, setMessage] = useState("");
 
@@ -23,4 +23,4 @@ const about = () => {
   )
 }
 
-export default about
+export default About
