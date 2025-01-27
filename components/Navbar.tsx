@@ -19,16 +19,16 @@ const Navbar = () => {
                 <Link href="/" className="hover:scale-110 hover:text-royalblue transition-all">
                     Home
                 </Link>
-                <Link href="/Text" className="hover:scale-110 hover:text-royalblue transition-all">
+                <Link href="/text" className="hover:scale-110 hover:text-royalblue transition-all">
                     Text Manipulator
                 </Link>
-                <Link href="/Number" className="hover:scale-110 hover:text-royalblue transition-all">
+                <Link href="/number" className="hover:scale-110 hover:text-royalblue transition-all">
                     Number Convertor
                 </Link>
-                <Link href="/Currency" className="hover:scale-110 hover:text-royalblue transition-all">
+                <Link href="/currency" className="hover:scale-110 hover:text-royalblue transition-all">
                     Currency Convertor
                 </Link>
-                <Link href="/About" className="hover:scale-110 hover:text-royalblue transition-all">
+                <Link href="/about" className="hover:scale-110 hover:text-royalblue transition-all">
                     About Us
                 </Link>
                 </div>
