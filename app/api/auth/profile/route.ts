@@ -1,30 +1,41 @@
 import { dbConnect } from '../../utils/dbConnect';
 import User from '../../models/userModel';
-import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
-    const token = req.headers.get('Authorization')?.split(' ')[1]; // Get token from Authorization header
+    // Connect to the database
+    await dbConnect();
+
+    // Extract the token from cookies
+    const cookieStore = await cookies(); // Wait for the Promise to resolve
+    const token = cookieStore.get('authToken')?.value;
 
     if (!token) {
-      return NextResponse.json({ message: 'Authorization token missing' }, { status: 401 });
+      return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });
     }
 
-    const decoded: any = jwt.verify(token, process.env.JWT_SECRET!); // Verify token
+    // Verify the JWT token
+    const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
     const userId = decoded.id;
 
-    // Fetch user profile from the DB
-    await dbConnect();
-    const user = await User.findById(userId).select('-password'); // Exclude password from the profile
-
+    // Fetch the user data
+    const user = await User.findById(userId).select('-password');
     if (!user) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    // Return user profile
-    return NextResponse.json(user);
+    // Respond with the user profile
+    return NextResponse.json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    });
   } catch (error) {
-    return NextResponse.json({ message: 'Something went wrong', error }, { status: 500 });
+    return NextResponse.json({ message: 'Authentication failed', error }, { status: 500 });
   }
 }
